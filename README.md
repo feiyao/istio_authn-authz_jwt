@@ -53,3 +53,15 @@ service/httpbin created
 deployment.apps/httpbin created
 ```
 
+Install Istio Gateway, VirtualService, PeerAuthentication, RequestAuthentication, AuthorizationPolicy.
+```
+$ kubectl apply -k ./ 
+gateway.networking.istio.io/httpbin-gateway created
+virtualservice.networking.istio.io/httpbin created
+authorizationpolicy.security.istio.io/require-jwt-httpbin created
+authorizationpolicy.security.istio.io/deny-jwt-gw created
+authorizationpolicy.security.istio.io/deny-by-default created
+peerauthentication.security.istio.io/default created
+requestauthentication.security.istio.io/jwt-authn-httpbin created
+requestauthentication.security.istio.io/jwt-authn-gw created
+```

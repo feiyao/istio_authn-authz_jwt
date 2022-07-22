@@ -1,0 +1,30 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: jwt-authn-gw
+  namespace: istio-gateway
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  jwtRules:
+  - issuer: "https://dev-wl5b26zy.us.auth0.com/"
+    jwksUri: "https://dev-wl5b26zy.us.auth0.com/.well-known/jwks.json"
+    audiences:
+    - "https://httpbin/api"
+    forwardOriginalToken: true
+---
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: jwt-authn-httpbin
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  jwtRules:
+  - issuer: "https://dev-wl5b26zy.us.auth0.com/"
+    jwksUri: "https://dev-wl5b26zy.us.auth0.com/.well-known/jwks.json"
+    audiences:
+    - "https://httpbin/api"

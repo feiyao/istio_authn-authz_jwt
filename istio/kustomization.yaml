@@ -1,0 +1,5 @@
+resources:
+  - peer-authn.yaml
+  - ingressgw-vs.yaml
+  - req-authn.yaml
+  - authz-policy.yaml

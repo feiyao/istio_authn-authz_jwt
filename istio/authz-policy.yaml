@@ -1,0 +1,44 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-by-default
+  namespace: istio-system
+  #annotations:
+  #    "istio.io/dry-run": "true"
+spec:
+  {}
+---
+apiVersion: "security.istio.io/v1beta1"
+kind: AuthorizationPolicy
+metadata:
+  name: deny-jwt-gw
+  namespace: istio-gateway
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notRequestPrincipals: ["*"]
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: require-jwt-httpbin
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+       requestPrincipals: ["https://dev-wl5b26zy.us.auth0.com//8qPXVf5npNa4yXmeyHhnGh5GDgrDK3B5@clients"]
+    when:
+    - key: request.auth.claims[scope]
+      values: ["read:messages"]
+    - key: request.auth.claims[aud]
+      values: ["https://httpbin/api"]

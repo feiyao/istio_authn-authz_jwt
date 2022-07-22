@@ -9,7 +9,7 @@ Table of contents
 
 Installation
 ============
-We will install Istio, Istio-Ingressgateway into a local cluster using [K3d](https://k3d.io).
+We will install Istio, Istio-Ingressgateway into a local cluster created by [K3d](https://k3d.io).
 
 Install Cluster
 ===============

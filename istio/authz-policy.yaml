@@ -1,13 +1,3 @@
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: deny-by-default
-  namespace: istio-system
-  #annotations:
-  #    "istio.io/dry-run": "true"
-spec:
-  {}
----
 apiVersion: "security.istio.io/v1beta1"
 kind: AuthorizationPolicy
 metadata:
@@ -36,7 +26,7 @@ spec:
   rules:
   - from:
     - source:
-       requestPrincipals: ["https://dev-wl5b26zy.us.auth0.com//8qPXVf5npNa4yXmeyHhnGh5GDgrDK3B5@clients"]
+        requestPrincipals: ["https://dev-wl5b26zy.us.auth0.com//8qPXVf5npNa4yXmeyHhnGh5GDgrDK3B5@clients"]
     when:
     - key: request.auth.claims[scope]
       values: ["read:messages"]

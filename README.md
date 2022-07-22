@@ -105,7 +105,7 @@ ACTION   AuthorizationPolicy         RULES
 DENY     deny-jwt-gw.istio-gateway   1
 ```
 
-Make a request
+Success Req:
 ```
 $ curl -i -H "Authorization:Bearer ${TOKEN}" http://localhost:8080/status/200
 HTTP/1.1 200 OK
@@ -116,4 +116,29 @@ access-control-allow-origin: *
 access-control-allow-credentials: true
 content-length: 0
 x-envoy-upstream-service-time: 2
+```
+
+Failure Req:
+```
+$ curl -i http://localhost:8080/status/200
+HTTP/1.1 403 Forbidden
+content-length: 19
+content-type: text/plain
+date: Fri, 22 Jul 2022 18:17:08 GMT
+server: istio-envoy
+
+RBAC: access denied
+```
+
+Failure Req:
+```
+$ curl -i -H "Authorization:Bearer unknown" http://localhost:8080/status/200
+HTTP/1.1 401 Unauthorized
+www-authenticate: Bearer realm="http://localhost:8080/status/200", error="invalid_token"
+content-length: 79
+content-type: text/plain
+date: Fri, 22 Jul 2022 18:17:43 GMT
+server: istio-envoy
+
+Jwt is not in the form of Header.Payload.Signature with two dots and 3 sections
 ```

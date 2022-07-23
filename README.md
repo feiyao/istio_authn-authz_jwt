@@ -8,6 +8,7 @@ Table of contents
     * [Application](#install-application)
 * [Setup Auth0](#setup-auth0)
 * [Test](#test)
+* [Cleanup](#cleanup)
 
 Installation
 ============
@@ -141,4 +142,11 @@ date: Fri, 22 Jul 2022 18:17:43 GMT
 server: istio-envoy
 
 Jwt is not in the form of Header.Payload.Signature with two dots and 3 sections
+```
+
+Cleanup
+=======
+```
+$ ./installation/cleanup.zsh
+...
 ```

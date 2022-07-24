@@ -3,7 +3,6 @@
 Table of contents
 =================
 * [Installation](#installation)
-    * [Cluster](#install-cluster)
     * [Istio](#install-istio)
     * [Application](#install-application)
 * [Setup Auth0](#setup-auth0)
@@ -14,37 +13,10 @@ Installation
 ============
 We will install Istio, Istio-Ingressgateway into a local cluster created by [K3d](https://k3d.io). For the demo purpose we'll also need to install [httpbin service](https://github.com/istio/istio/blob/master/samples/httpbin/httpbin.yaml).
 
-Install Cluster
-===============
-```
-$ ./installation/install-cluster.zsh
-...
-```
 
 Install Istio
 =============
-Setup the Istio version
-```
-$
-export ISTIO_VERSION=1.14.1
-export ISTIO_VERSION_TAG=1.14.1-distroless
-export ISTIO_REVISION=1-14-1
-```
-Install Istiod
-```
-$ ./installation/install-istio.zsh
-...
-```
-Install Istio-Ingressgateway
-```
-$ ./installation/install-gateway.zsh
-...
-```
-
-Make `default` namespace Istio sidecar auto-injection.
-```
-$ kubectl label namespace default istio.io/rev=$ISTIO_REVISION --overwrite
-```
+Please follow the [Istio-Installation-Guide](https://github.com/feiyao/istio-installation) for the installation.
 
 Install Application
 ===================
@@ -142,11 +114,4 @@ date: Fri, 22 Jul 2022 18:17:43 GMT
 server: istio-envoy
 
 Jwt is not in the form of Header.Payload.Signature with two dots and 3 sections
-```
-
-Cleanup
-=======
-```
-$ ./installation/cleanup.zsh
-...
 ```
